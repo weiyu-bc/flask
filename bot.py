@@ -17,7 +17,7 @@ def run_discord_bot():
     intents.typing = False
     intents.presences = False
 
-    my_secret = 'MTA2MDI3MzkzMDQ0MDU0ODQ5Mg.GqzeCk.wgekG2JOo_sVVCmrfuO-TkOmoBwM4g4Qz1657k'
+    my_secret = ''
     # my_secret = os.environ['TOKEN']
 
     client = discord.Client(intents=intents)
