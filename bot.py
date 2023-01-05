@@ -1,0 +1,46 @@
+import discord
+import responses
+import os
+
+
+async def send_message(msg, user_msg, is_private):
+    try:
+        response = responses.handle_response(user_msg)
+        await msg.author.send(response) if is_private else await msg.channel.send(response)
+
+    except Exception as e:
+        print(e)
+
+
+def run_discord_bot():
+    intents = discord.Intents.all()
+    intents.typing = False
+    intents.presences = False
+
+    my_secret = 'MTA2MDI3MzkzMDQ0MDU0ODQ5Mg.GqzeCk.wgekG2JOo_sVVCmrfuO-TkOmoBwM4g4Qz1657k'
+    # my_secret = os.environ['TOKEN']
+
+    client = discord.Client(intents=intents)
+
+    @client.event
+    async def on_ready():
+        print(f"{client.user} is running.")
+
+    @client.event
+    async def on_message(msg):
+        if msg.author == client.user:
+            return
+
+        username = msg.author
+        user_msg = str(msg.content)
+        channel = str(msg.channel)
+
+        print(f"{username} said: {user_msg} at {channel}.")
+        if user_msg.startswith('?id'):
+
+            await send_message(msg, user_msg, is_private=True)
+        else:
+            await send_message(msg, user_msg, is_private=False)
+
+    client.run(my_secret)
+
