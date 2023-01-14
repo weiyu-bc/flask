@@ -5,9 +5,9 @@ from read_csv import read_csv_file_get_list
 
 db = mysql.connector.connect(
     host="192.168.56.200",
-    user="alex",
-    password="123456",
-    database="mall",
+    user="",
+    password="",
+    database="",
     auth_plugin='mysql_native_password'
 )
 
